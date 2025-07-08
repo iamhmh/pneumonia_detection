@@ -1,0 +1,8 @@
+Métrique,Valeur
+Précision,0.7628205128205128
+F1-score,0.7285954785954786
+AUC ROC,0.8910365987289064
+Sensibilité,0.9948717948717949
+Spécificité,0.37606837606837606
+Valeur prédictive positive,0.7265917602996255
+Valeur prédictive négative,0.9777777777777777

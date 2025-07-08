@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Détection de Pneumonie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-form {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .normal {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .pneumonia {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .model-selector {
+            margin-bottom: 15px;
+        }
+        .model-info {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Détection de Pneumonie à partir de Radiographies</h1>
+    <p>Téléchargez une radiographie thoracique pour déterminer si elle présente des signes de pneumonie.</p>
+    
+    <div class="upload-form">
+        <form id="upload-form">
+            <div class="model-selector">
+                <label>Sélectionnez le modèle:</label>
+                <select id="model-type">
+                    <option value="resnet">ResNet (Deep Learning)</option>
+                    <option value="svm">SVM (Machine Learning)</option>
+                </select>
+                <div class="model-info" id="model-info">
+                    ResNet: Réseau de neurones profond pour la classification d'images
+                </div>
+            </div>
+            
+            <input type="file" id="image-input" accept="image/*" required>
+            <button type="submit">Analyser</button>
+        </form>
+    </div>
+    
+    <div id="result" style="display: none;"></div>
+
+    <script>
+        document.getElementById('model-type').addEventListener('change', function() {
+            const modelInfo = document.getElementById('model-info');
+            if (this.value === 'svm') {
+                modelInfo.textContent = 'SVM: Machine à vecteurs de support optimisée avec PCA';
+            } else {
+                modelInfo.textContent = 'ResNet: Réseau de neurones profond pour la classification d\'images';
+            }
+        });
+    
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('image-input');
+            const file = fileInput.files[0];
+            const modelType = document.getElementById('model-type').value;
+            
+            if (!file) {
+                alert('Veuillez sélectionner une image');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('model_type', modelType);
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                
+                const resultDiv = document.getElementById('result');
+                resultDiv.style.display = 'block';
+                resultDiv.className = 'result ' + (data.prediction === 'NORMAL' ? 'normal' : 'pneumonia');
+                
+                resultDiv.innerHTML = `
+                    <h2>Résultat: ${data.prediction}</h2>
+                    <p>Confiance: ${(data.confidence * 100).toFixed(2)}%</p>
+                    <p>Modèle utilisé: ${data.model_used === 'svm' ? 'SVM (Machine Learning)' : 'ResNet (Deep Learning)'}</p>
+                `;
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de l\'analyse');
+            }
+        });
+    </script>
+</body>
+</html>
