@@ -66,6 +66,49 @@ The dataset is organized into three parts:
 - Validation: 8 images per class
 - Test: 234 normal images, 390 pneumonia images
 
+## Results and Visualizations
+
+### Exploratory Data Analysis
+Our EDA revealed important insights about the dataset distribution and image characteristics:
+
+![Dataset Distribution](reports/eda/eda_count_distribution.png)
+*Distribution of pneumonia vs normal cases in the dataset*
+
+![Sample Images](reports/eda/eda_samples.png)
+*Sample chest X-ray images from the dataset*
+
+![Intensity Analysis](reports/eda/eda_intensity_histogram.png)
+*Pixel intensity distribution analysis*
+
+### Model Performance Comparison
+
+![Model Comparison](reports/modeling/modeling_comparaison_performance_modele_v1.png)
+*Performance comparison between different machine learning and deep learning models*
+
+### SVM Analysis Results
+Our SVM analysis provided detailed insights into classical machine learning performance:
+
+![SVM Confusion Matrix](reports/svm/confusion_matrix.png)
+*SVM model confusion matrix showing classification performance*
+
+![ROC Curve](reports/svm/roc_curve.png)
+*ROC curve demonstrating SVM model discriminative ability*
+
+![Clinical Metrics](reports/svm/clinical_metrics.png)
+*Clinical performance metrics including sensitivity and specificity*
+
+### U-Net Deep Learning Results
+The U-Net architecture showed promising results for pneumonia detection:
+
+![U-Net Model Comparison](reports/unet/model_comparison.png)
+*Comparison of different U-Net configurations*
+
+![U-Net Confusion Matrix](reports/unet/confusion_matrix.png)
+*U-Net model confusion matrix*
+
+![Attention Maps](reports/unet/attention_maps.png)
+*Attention maps showing model focus areas during prediction*
+
 ## Usage
 
 ### EDA (Exploratory Data Analysis)
@@ -102,6 +145,29 @@ Place the downloaded files in the `models/` folder:
 
 ## Dependencies 
 See `requirements.txt` for a complete list of dependencies and their versions.
+
+## Key Performance Metrics
+
+### SVM Model Performance
+- **Accuracy**: High classification accuracy on test set
+- **Sensitivity**: Optimized for medical diagnostics
+- **Specificity**: Balanced false positive control
+- **AUC-ROC**: Strong discriminative performance
+
+![SVM Performance Summary](reports/svm/best_models_comparison.png)
+*Summary of best performing SVM configurations*
+
+### U-Net Model Performance
+- **Advanced Architecture**: Attention-based U-Net for improved feature extraction
+- **Clinical Relevance**: Focus on medically relevant image regions
+- **Robust Performance**: Consistent results across different chest X-ray types
+
+![U-Net Clinical Metrics](reports/unet/clinical_metrics.png)
+*Clinical performance metrics for U-Net model*
+
+For detailed performance analysis, refer to the CSV files in the respective model directories:
+- `reports/svm/performance_summary.csv` - Complete SVM metrics
+- `reports/unet/model_comparison.csv` - U-Net model comparisons
 
 ## Author
 [**Hichem GOUIA**](https://github.com/iamhmh)
