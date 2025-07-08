@@ -1,9 +1,9 @@
-# Pneumonia Detection
+# Pneumonia Detection using Machine Learning and Deep Learning 
 
 ## Description
 Medical image analysis project using machine learning and deep learning for automatic detection of pneumonia from chest X-rays.
 
-## Structure du Projet
+## Project Structure
 ```
 .
 ├── models/                    # Trained models and weights
