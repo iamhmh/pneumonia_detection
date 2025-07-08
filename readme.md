@@ -1,99 +1,107 @@
-# Zoidberg 2.0
+# Pneumonia Detection
 
 ## Description
-Projet d'analyse d'images médicales utilisant le machine learning et le deep learning pour la détection automatique de la pneumonie à partir de radiographies pulmonaires.
+Medical image analysis project using machine learning and deep learning for automatic detection of pneumonia from chest X-rays.
 
 ## Structure du Projet
 ```
 .
-├── dataset/               
-│   ├── train/                 # Images d'entraînement
-│   ├── val/                   # Images de validation
-│   └── test/                  # Images de test
-├── processed/                 # Données prétraitées
-├── notebooks/             
-│   ├── 01_EDA.ipynb           # Analyse exploratoire des données
-│   └── 02_Modeling.ipynb      # Développement des modèles
-│   └── 03_DeepLearning.ipynb  # Développement des modèles
-├── reports/              
-│   └── eda/                   # Graphiques d'analyse exploratoire des données
-│   └── modeling/              # Graphiques d'anlyses des eprformances des models
-├── src/                   
-│   └── app.py                 # Page Web de test
-│   └── predict.py             # Récupération du modèle, traitement de l'image et prédiction
-│   └── preprocessing.py       # Scripts de prétraitement
-└── models/                    # Modèles entraînés
-└── templates/                 # Point d'entrée web 
-└── uploads/                   # Suavegarde locale des images (web)
+├── models/                    # Trained models and weights
+├── notebooks/                 # Notebooks Jupyter for analysis and modeling
+│   ├── data_analysis/         # EDA (Exploratory Data Analysis)
+│   │   ├── 01_EDA.ipynb       # EDA notebook
+│   │   └── 04_PCA_Analysis.ipynb  # PCA analysis
+│   ├── dl/                    # Deep Learning
+│   │   └── 06_UNET_Analysis.ipynb  # Analysis with U-Net
+│   ├── ml/                    # Classical Machine Learning
+│   │   └── 05_SVM_Analysis.ipynb   # Analysis with SVM
+│   └── modelling/             # General modeling
+│       ├── 02_Modeling.ipynb  # Modeling notebook
+│       └── 03_DeepLearning.ipynb  # Deep Learning modeling
+├── reports/                   # Generated reports and visualizations
+│   ├── eda/                   # Visualisations EDA
+│   ├── modeling/              # Modeling results and metrics
+│   ├── pca/                   # PCA results and metrics
+│   ├── svm/                   # Results and metrics SVM
+│   └── unet/                  # U-Net results and metrics
+├── src/                       # Source code for the project 
+│   ├── app.py                 # Flask application for web interface
+│   ├── predict.py             # Model prediction script
+│   ├── predict_svm.py         # SVM prediction script
+│   ├── preprocessing.py       # Data preprocessing functions
+│   └── uploads/               # Directory for uploaded images
+├── templates/                 # HTML templates for Flask
+│   └── index.html             # Main page template
+├── uploads/                   # Directory for uploaded images
+├── requirements.txt           # Python dependencies
+└── readme.md                  # Project documentation
 ```
 
 ## Installation
 
-### Prérequis
+### Requirements
 - Python 3.13+
-- pip ou conda
+- pip or conda
 
-### Configuration de l'environnement
+### Environment Setup
 
 ```bash
-# Création de l'environnement virtuel
+# Setup a virtual environment
 python -m venv .venv
 
-# Activation de l'environnement (macOS/Linux)
+# Activation of the environment (macOS/Linux)
 source .venv/bin/activate
 
-# Activation de l'environnement (windows)
+# Activation of the environment (Windows)
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 .\.venv\Scripts\Activate.ps1
 
-# Installation des dépendances
+# Install dependencies
 pip install -r requirements.txt
 ```
 
 ## Dataset
-Le dataset est organisé en trois parties :
-- Train : 1341 images normales, 3875 images de pneumonie
-- Validation : 8 images par classe
-- Test : 234 images normales, 390 images de pneumonie
+The dataset is organized into three parts:
+- Train: 1341 normal images, 3875 pneumonia images
+- Validation: 8 images per class
+- Test: 234 normal images, 390 pneumonia images
 
-## Utilisation
+## Usage
 
-### Analyse Exploratoire des Données
+### EDA (Exploratory Data Analysis)
 ```bash
 jupyter lab notebooks/01_EDA.ipynb
 ```
 
-### Entraînement des Modèles de Machine Learning
+### Training Machine Learning Models
 ```bash
 jupyter lab notebooks/02_Modeling.ipynb
 ```
 
-### Entraînement des Modèles de Deep Learning
+### Training Deep Learning Models
 ```bash
 jupyter lab notebooks/03_DeepLearning.ipynb
 ```
 
-## Modèles pré-entraînés
+## Pre-trained Models
 
-En raison de leur taille, les modèles pré-entraînés ne sont pas inclus dans ce dépôt GitHub. Vous pouvez :
+Due to their size, pre-entrained templates are not included in this GitHub repository. You can:
 
-- Les générer en exécutant les notebooks `02_Modeling.ipynb` et `03_DeepLearning.ipynb`
+- Generate them by running the notebooks `02_Modeling.ipynb` and `03_DeepLearning.ipynb`.
 
-Placez les fichiers téléchargés dans le dossier `models/` :
-- `best_classical_model.pkl` - Modèle de machine learning classique
-- `resnet18_pneumonia.pth` - Modèle de deep learning ResNet18
+Place the downloaded files in the `models/` folder:
+- `best_classical_model.pkl` - Classic machine learning model
+- `resnet18_pneumonia.pth` - ResNet18 deep learning model
 
-## Technologies Utilisées
+## Used Technologies
 - **Data Processing**: NumPy, Pandas
 - **Image Processing**: OpenCV, Pillow, Albumentations
 - **Machine Learning**: Scikit-learn, PyTorch
 - **Visualisation**: Matplotlib, Seaborn, Plotly
 - **Deep Learning**: PyTorch, Torchvision
 
-## Versions des Dépendances
-Voir le fichier `requirements.txt` pour la liste complète des dépendances et leurs versions.
+## Dependencies 
+See `requirements.txt` for a complete list of dependencies and their versions.
 
 ## Author
 [**Hichem GOUIA**](https://github.com/iamhmh)
-[**Melvyn DENIS**](https://github.com/MelvynDenisEpitech)
-[**Mathéo SERRIER**](https://github.com/matheoSerrier)
